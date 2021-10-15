@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation bar</title>
+    <style>
+    .navbar{
+        background-color:rgb(2, 2, 2);
+        
+        border-radius: 30px;
+    }
+    body{
+        background-color: rgb(185, 195, 241);
+    }
+    .navbar ul{
+        overflow: auto;
+        
+    }
+    .navbar li{
+        float: left;
+        list-style: none; 
+        margin: 13px 20px;    
+    }
+    .navbar  li a{
+        text-decoration: none;
+        padding: 3px 3px;
+        color: aliceblue;
+    }
+    .navbar  li a:hover{
+       color: rgb(214, 214, 32);
+    }
+    .search{
+        margin: 15px 45px;
+        text-align: right;
+        
+    }
+    .navbar input{
+        border-radius: 33px;
+        padding: 6px 35px;
+    }
+    .para{
+        background-color: blueviolet;
+        border: 3px solid red;
+        float: right;
+        float: top;
+        width: 40%;
+        margin: 33px 12px;
+    }
+    h2{
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        text-align:center;
+        
+    }
+    .search input{
+        width: 124px;
+    }
+    
+    </style>
+</head>
+<body>
+    <h2><strong>THE GYM</strong> </h2>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#"> Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact us</a></li>
+                <div class="search" style="color: rgb(241, 241, 241);">
+                   <input type="text" name="search bar" id="search bar" placeholder="serach this website">
+                </div>
+            </ul>
+        </nav>
+    </header>
+    <main> <img src="https://th.bing.com/th/id/Rb22ceb0e6081fd9dbd57ee8c3a7186c7?rik=gsMC%2fYvgvhi%2buQ&riu=http%3a%2f%2fcdn.wallpapersafari.com%2f3%2f21%2f9MqoKp.jpg&ehk=%2bwDQnmDDFZx%2bZ6%2f8vue8Jx5DdamWoscgAbmYWiuRkBI%3d&risl=&pid=ImgRaw" alt="error loading"></main>
+    <h2>whoever wants to join the GYM please fill this form carefully</h2>
+    <div>
+            <form action="backend.php">
+                <br> <div>
+                    <label for="name"> <strong>Name:</strong></label>
+                    <input type="text" name="name" id="name" style="border-radius: 3px; border: 3px solid rgb(32, 30, 30);">
+
+                </div>
+                <br>
+                <div>
+                    <label for="email" ><strong>Email: </strong></label>
+                    <input type="email" name="my email" id="email" style="border-radius: 3px; border: 3px solid rgb(32, 30, 30);">
+                </div>
+                <br>
+                <div>
+                    <label for="phone"><strong>Phone: </strong></label>
+                    <input type="number" name="phone" id="phone" style="border-radius: 3px; border: 3px solid rgb(32, 30, 30);">
+                </div>
+                <br>
+                <div>
+                    <label for="gender"><strong>Gender: </strong></label>
+                    male<input type="radio" name="my gender" >  female<input type="radio" name="my gender" >  others<input type="radio" name="my gender" id="gender" style="border-radius: 3px; border: 3px solid rgb(32, 30, 30);">
+                </div>
+                <br>
+                <div>
+                    <label for="exercise"> <strong>Exercise:</strong></label>
+                 <select name="exercise" id="exercise" style="border-radius: 3px; border: 3px solid rgb(32, 30, 30);">
+                     <option value="cardio">cardio</option>
+                     <option value="muscle toning">muscle toning</option>
+                     <option value="weight loss">weight loss</option>
+                     <option value="competition">competition</option>
+                 </select>
+                </div>
+                 <br>
+                 <div>
+                     <label for="age"> <strong>Age:</strong></label>
+                    <input type="number" name="age" id="age" placeholder="your age" style="border-radius: 3px; border: 3px solid rgb(32, 30, 30);">
+                 </div>
+                 <br>
+                 <div>
+                     <input type="submit" value="submit now" style="border-radius: 3px; border: 3px solid rgb(32, 30, 30) ; font-weight: bolder;">
+                     <input type="reset" value="reset now" style="border-radius: 3px; border: 3px solid rgb(32, 30, 30); font-weight: bolder;">
+
+                 </div>
+                 
+                
+            </form>
+
+        </div>
+     
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS in html</title>
+    <style>
+        /* internal css */
+        /* important tag is basically used to give a precdence to any given css */
+        p{
+            color: blue;
+            background-color: aqua !important;
+        }
+        </style>
+        <link rel="stylesheet" href="externalCSS.css">
+</head>
+<body>
+    <!-- inline css takes precedence over internal css -->
+    <h3 style = "color: red ;  background-color:rgb(205, 255, 205);">CSS in html</h3>
+    <!-- <p style="color: rgb(29, 4, 253) ;  background-color:blanchedalmond;">hey guys , this is deepanshu here and today i m going to tell u about implementation of css in html</p> -->
+    <p>hey guys , this is deepanshu here and today i m going to tell u about implementation of css in html</p>
+</body>
+</html>
