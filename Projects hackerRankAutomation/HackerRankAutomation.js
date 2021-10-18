@@ -9,7 +9,7 @@
 let minimist = require("minimist");
 let fs = require("fs");
 let puppeteer = require("puppeteer");
-// node puppeteerDemo.js --url=https://www.hackerrank.com/auth/login --config=config.JSON
+// node HackerRankAutomation.js --url=https://www.hackerrank.com --config=config.JSON
 
 let args = minimist(process.argv);
 let url = args.url;
@@ -32,79 +32,96 @@ let config = JSON.parse(configJSON);
 
     // Redirecting to login Page
     await page.goto(url);
+    await page.waitFor(1000);
 
-    // Clicking on cookie button
-    await page.click("div.cookie-container > div.cookie-btn-wrapper");
+    // first login page
+    await page.waitForSelector("a[href='https://www.hackerrank.com/access-account/']");
+    await page.click("a[href='https://www.hackerrank.com/access-account/']");
 
-    for (let i = 0; i < 3; i++) {
-        await page.keyboard.press("Tab", {
-            delay: 500
-        });
-    }
+    // Login for developers
+    await page.waitForSelector("a[href='https://www.hackerrank.com/login']");
+    await page.click("a[href='https://www.hackerrank.com/login']");
 
-    // Typing userid
-    await page.keyboard.type(config.userid, {
-        delay: 100
-    });
-    // Tab
-    await page.keyboard.press("Tab", {
-        delay: 100
-    });
 
-    // Typing Password
-    await page.keyboard.type(config.password, {
+    // Main Login page
+    // Userid
+    await page.waitFor(3500);
+    await page.waitForSelector("input[name='username']");
+    await page.type("input[name='username']", config.userid, {
         delay: 100
     });
 
-    // Tab
-    for (let i = 0; i < 3; i++) {
-        await page.keyboard.press("Tab", {
-            delay: 100
-        });
-    }
+    // password
+    await page.waitForSelector("input[name='password']");
+    await page.type("input[name='password']", config.password, {
+        delay: 100
+    });
 
-    // Clicking on Login button
-    await page.keyboard.press('Enter');
-    await page.waitForNavigation({ waitUntil: 'networkidle2' });
+    // Login button
+    await page.waitForSelector("button[data-analytics='LoginPassword']");
+    await page.click("button[data-analytics='LoginPassword']");
 
 
     // Navigating to contest 
+    await page.waitForSelector("a.nav-link.contests");
     await page.click("a.nav-link.contests");
 
     await page.waitFor(3500);
     await page.waitForSelector("a.text-link.filter-item");
     await page.click("a.text-link.filter-item");
 
-    // Managing Contest 
-    await page.waitFor(3500);
-    await page.waitForSelector("p.mmT");
-    await page.click("p.mmT");
 
-    // Navigating to Moderators 
-    await page.waitFor(3500);
-    await page.waitForSelector("#content > div > section > header > div > div.tabs-cta-wrapper > ul > li:nth-child(4)");
-    await page.click("#content > div > section > header > div > div.tabs-cta-wrapper > ul > li:nth-child(4)");
+    //              <------------ Clicking on Multiple contests------------->
 
-    // Adding Moderators 
-    await page.waitFor(3500);
-    await page.waitForSelector("#moderator");
-
-    await page.keyboard.press("Tab", {
-        delay: 100
+    // Getting urls of multiple contest
+    await page.waitForSelector("a.backbone.block-center");
+    let curls = await page.$$eval("a.backbone.block-center", function (atags) {
+        let urls = [];
+        for (let i = 0; i < atags.length; i++) {
+            let url = atags[i].getAttribute("href");
+            urls.push(url);
+        }
+        return urls;
     })
-    await page.keyboard.press("Tab", {
-        delay: 100
-    })
-    await page.keyboard.type(config.moderators[0], {
-        delay: 100
-    });
 
-    await page.keyboard.press("Tab", {
-        delay: 100
-    });
-    await page.keyboard.press("Enter", {
-        delay: 100
-    });
+
+    // Opening each contest in new tab(Adding Moderators)
+    await page.waitFor(1500);
+    for (let i = 0; i < curls.length; i++) {
+        let curl = curls[i];
+        let Ctab = await browser.newPage();
+        await Ctab.goto(url + curl);
+        await Ctab.bringToFront();
+        await Ctab.waitFor(1500);
+
+        // Navigating to Moderators 
+        await Ctab.waitFor(1500);
+        await Ctab.waitForSelector("#content > div > section > header > div > div.tabs-cta-wrapper > ul > li:nth-child(4)");
+        await Ctab.click("#content > div > section > header > div > div.tabs-cta-wrapper > ul > li:nth-child(4)");
+
+        // Adding Moderators 
+        for (let i = 0; i < config.moderators.length; i++) {
+
+            await page.waitFor(1000);
+            // Typing Moderators
+            await Ctab.waitForSelector("input#moderator");
+            await Ctab.click("input#moderator");
+            await Ctab.type("input#moderator", config.moderators[i], {
+                delay: 100
+            });
+
+            // clicking on add button
+            await Ctab.keyboard.press("Tab", { delay: 100 });
+            await Ctab.keyboard.press('Enter');
+        }
+
+        await Ctab.waitFor(3000);
+        await Ctab.close();
+    }
+
+
+
+
 
     // Closing the browser after the moderators has been added successfully.
     await page.waitFor(3500);
