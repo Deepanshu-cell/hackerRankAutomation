@@ -1,3 +1,9 @@
+
+/*
+The Aim of this project is to make a webiste with database using mongodb
+*/
+
+
 const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
@@ -27,6 +33,9 @@ hbs.registerPartials(partialpath);
 // routing
 // app.get(path, callback)
 app.get("/", (req, res) => {
+    res.render("login");
+})
+app.get("/index", (req, res) => {
     res.render("index");
 })
 
