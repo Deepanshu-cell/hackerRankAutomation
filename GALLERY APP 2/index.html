@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Gallery App</title>
+  </head>
+  <body>
+    <div id="action-bar">
+      <span id="saveAlbum" class="material-icons">save</span>
+      <span id="addAlbum" class="material-icons">add</span>
+      <span id="deleteAlbum" class="material-icons">delete</span>
+      <span id="importAlbum" class="material-icons">upload</span>
+      <span id="exportAlbum" class="material-icons">download</span>
+      <span id="playAlbum" class="material-icons"> play_circle_filled </span>
+
+      <select id="selectAlbum">
+        <option value="-1">Select an album</option>
+      </select>
+      <input type="file" multiple="false" id="uploadFile" />
+    </div>
+    <div id="content">
+      <div id="content-list">
+        <div id="new-Slide">New Slide</div>
+        <div id="Slide-list"></div>
+      </div>
+
+      <div id="content-detail">
+        <div id="create-slide">
+          <div>
+            <input id="textSlideImage" type="text" placeholder="Image Url" />
+          </div>
+          <div>
+            <input id="textSlideTitle" type="text" placeholder="Title" />
+          </div>
+          <div>
+            <textarea
+              id="textSlideDesc"
+              placeholder="Description"
+              id=""
+              cols="30"
+              rows="10"
+            ></textarea>
+          </div>
+          <div>
+            <button id="btnSaveSlide">Save Slide</button>
+          </div>
+        </div>
+        <div id="show-slide">Show Slide it is</div>
+      </div>
+
+      <div id="content-details-overlay">
+        <div id="textContent">Please Select a Slide</div>
+      </div>
+    </div>
+
+    <div id="overlay">
+      <div id="text">Please Select an Album</div>
+    </div>
+
+    <div id="play-overlay">
+      <div id="text">Playing the Album..</div>
+    </div>
+
+    <!-- template for cloning elements -->
+    <template id="allTemplate">
+      <option purpose="new-album" value=""></option>
+
+      <!-- slide cloning content -->
+      <div class="slide">
+        <div class="title"></div>
+        <div class="slide-content">
+          <div class="desc"></div>
+          <img id="slide-img" src="" alt="" />
+        </div>
+      </div>
+
+      <div class="slide-in-view">
+        <div class="slide-header">
+          <div class="title"></div>
+          <span purpose="edit" class="material-icons">edit</span>
+          <span purpose="delete" class="material-icons">delete</span>
+        </div>
+        <div class="slide-content">
+          <div class="desc"></div>
+          <img id="slide-img" src="" alt="" />
+        </div>
+      </div>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
